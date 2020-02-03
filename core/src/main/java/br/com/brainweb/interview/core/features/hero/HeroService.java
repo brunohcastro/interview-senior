@@ -4,6 +4,8 @@ import br.com.brainweb.interview.core.features.powerstats.PowerStatsEntity;
 import br.com.brainweb.interview.core.features.powerstats.PowerStatsRepository;
 import br.com.brainweb.interview.model.Hero;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@CacheConfig(cacheNames = "heroes")
 public class HeroService {
 
     private final HeroRepository repository;
@@ -26,6 +29,7 @@ public class HeroService {
         this.mMapper = mMapper;
     }
 
+    @Cacheable()
     public List<Hero> find(String name) {
         List<HeroEntity> heroEntities = new ArrayList<>();
         if (name != null) {
@@ -37,6 +41,7 @@ public class HeroService {
         return heroEntities.stream().map(it -> mMapper.map(it, Hero.class)).collect(Collectors.toList());
     }
 
+    @Cacheable()
     public Optional<Hero> findById(UUID id) {
         return this.repository.findById(id).map(it -> mMapper.map(it, Hero.class));
     }

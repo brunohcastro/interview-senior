@@ -6,6 +6,10 @@ services:
       - 8400:8400
       - 8500:8500
       - 8600:8600
+  hazelcast:
+    image: hazelcast/hazelcast
+    ports:
+      - 5701:5701
   postgres:
     build:
       context: ./core/src/main/resources/db/schema

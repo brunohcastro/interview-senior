@@ -38,11 +38,14 @@
         <jaxb.version>2.3.1</jaxb.version>
         <disruptor.version>3.4.2</disruptor.version>
         <modelmapper.version>2.3.0</modelmapper.version>
+        <spring-cloud.version>2.2.1.RELEASE</spring-cloud.version>
     </properties>
 
     <modules>
         <module>core</module>
         <module>model</module>
+        <module>proxy</module>
+        <module>hystrix</module>
     </modules>
 
     <dependencyManagement>
@@ -84,6 +87,35 @@
                 <version>${jackson.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-all</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-histryx</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-netflix-turbine</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -1,6 +1,5 @@
 package br.com.brainweb.interview.core.features.hero;
 
-import br.com.brainweb.interview.model.PowerStats;
 import br.com.brainweb.interview.model.Race;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,7 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -29,8 +29,8 @@ public class HeroEntity {
     private Boolean enabled;
 
     @CreatedDate
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 }

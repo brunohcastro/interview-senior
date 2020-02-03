@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Hero {
+public class Hero implements Serializable {
 
     @With
     @EqualsAndHashCode.Include
@@ -29,7 +29,6 @@ public class Hero {
     @NotNull
     private Race race;
 
-    @Valid
     @NotNull
     private PowerStats powerStats;
 
@@ -38,8 +37,8 @@ public class Hero {
     private Boolean enabled = Boolean.TRUE;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 }

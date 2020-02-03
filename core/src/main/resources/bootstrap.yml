@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: service-a
   cloud:
     consul:
       discovery:
@@ -14,8 +12,6 @@ spring:
 ---
 spring:
   profiles: docker
-  application:
-    name: service-a
   cloud:
     consul:
       discovery:

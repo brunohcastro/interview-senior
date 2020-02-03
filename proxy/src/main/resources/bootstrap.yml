@@ -1,26 +1,28 @@
 server:
-  port: 8090
+  port: 8060
 
 spring:
   application:
-    name: hystrix
+    name: iv-proxy
   cloud:
     consul:
       discovery:
         prefer-ip-address: true
       host: 127.0.0.1
       port: 8500
-
-turbine:
-  appConfig: service-a
+zuul:
+  routes:
+    a-service:
+      path: /**
+      serviceId: iv-core
 ---
 server:
-  port: 8050
+  port: 8060
 
 spring:
   profiles: docker
   application:
-    name: hystrix
+    name: iv-proxy
   cloud:
     consul:
       discovery:
@@ -28,5 +30,8 @@ spring:
       host: consul
       port: 8500
 
-turbine:
-  appConfig: service-a
+zuul:
+  routes:
+    a-service:
+      path: /**
+      serviceId: iv-core

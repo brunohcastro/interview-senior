@@ -5,14 +5,15 @@ import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PowerStats {
+public class PowerStats implements Serializable {
 
     @With
     @EqualsAndHashCode.Include
@@ -36,8 +37,8 @@ public class PowerStats {
     private Integer intelligence;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 }

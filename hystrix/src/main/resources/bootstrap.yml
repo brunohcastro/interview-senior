@@ -1,0 +1,32 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: hystrix
+  cloud:
+    consul:
+      discovery:
+        prefer-ip-address: true
+      host: 127.0.0.1
+      port: 8500
+
+turbine:
+  appConfig: iv-core
+---
+server:
+  port: 8050
+
+spring:
+  profiles: docker
+  application:
+    name: hystrix
+  cloud:
+    consul:
+      discovery:
+        prefer-ip-address: true
+      host: consul
+      port: 8500
+
+turbine:
+  appConfig: iv-core
