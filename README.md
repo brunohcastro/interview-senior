@@ -60,11 +60,30 @@ Será considerado um plus os candidatos que entregarem:
 
 ### Stack
 - Hashicorp Consul for Service Discovery and Configuration Server
-- Spring LoadBalancer backed by Netflix Ribbon
-- Spring Cloud Circuit Breaker backed by Netflix Hystrix for Service Recovery 
-- Spring Cloud Gateway for API Gateway
-- Grafana + Influx DB for monitoring
+- Spring LoadBalancer backed by Netflix Ribbon and Zuul Proxy
+- Spring Cloud Circuit Breaker backed by Netflix Hystrix 
 - Hazelcast for distributed cache
+- Homebrew solution for FeatureToggle using Consul Configuration Server
 
+### Running 
 
+- Run the script: `./run.sh`
+- Wait for it to initialize
+- The API is accessible through the gateway at: `http://localhost:8082/iv/api/v1/heroes`
 
+- The Hystrix dashboard is accessible through:  `http://localhost:8083/hystrix`
+    - To connect with the gateway, use `http://gateway:8082/actuator/metrics/hystrix.stream`
+- The consul dashboard is accessible through: `http://localhost:8500/ui`
+    - To add a feature toggle, use the Key/Value store
+    - Create the folders: `config/iv-core/`  
+    - Add a configuration with one of the keys and set it to `true/false`:
+        - `features.heroes.list`
+        - `features.heroes.find`
+        - `features.heroes.power-stats`
+        - `features.heroes.create`
+        - `features.heroes.power-stats`
+        - `features.heroes.update`
+        - `features.heroes.enable`
+        - `features.heroes.disable`
+        - `features.heroes.delete`
+        - `features.heroes.compare` 
