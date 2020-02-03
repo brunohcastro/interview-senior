@@ -37,6 +37,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <jaxb.version>2.3.1</jaxb.version>
         <disruptor.version>3.4.2</disruptor.version>
+        <modelmapper.version>2.3.0</modelmapper.version>
     </properties>
 
     <modules>
@@ -72,6 +73,17 @@
                 <artifactId>disruptor</artifactId>
                 <version>${disruptor.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

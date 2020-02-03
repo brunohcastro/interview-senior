@@ -57,3 +57,14 @@ Será considerado um plus os candidatos que entregarem:
 - O sistema ser capaz de se recuperar de falhas. (Circuit-Breaker);
 - Monitoramento da aplicação por alguma ferramenta (Ex: Grafana);
 - Mecanismo de Feature Toggle usando JMX;
+
+### Stack
+- Hashicorp Consul for Service Discovery and Configuration Server
+- Spring LoadBalancer backed by Netflix Ribbon
+- Spring Cloud Circuit Breaker backed by Netflix Hystrix for Service Recovery 
+- Spring Cloud Gateway for API Gateway
+- Grafana + Influx DB for monitoring
+- Hazelcast for distributed cache
+
+
+
