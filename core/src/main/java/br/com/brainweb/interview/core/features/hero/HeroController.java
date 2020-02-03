@@ -35,12 +35,13 @@ public class HeroController {
     }
 
     @GetMapping
-    @FeatureToggle(feature = "feature.hero.enabled")
+    @FeatureToggle(feature = "features.heroes.list")
     public List<Hero> find(@RequestParam(value = "name", required = false) String name) {
         return heroService.find(name);
     }
 
     @GetMapping("/{id}")
+    @FeatureToggle(feature = "features.heroes.find")
     public Hero findById(@PathVariable("id") String id) {
         Hero hero = this.heroService.findById(UUID.fromString(id))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -54,6 +55,7 @@ public class HeroController {
     }
 
     @GetMapping("/{id}/power-stats")
+    @FeatureToggle(feature = "features.heroes.power-stats")
     public PowerStats getPowerStatsFor(@PathVariable("id") String id) {
         return this.heroService.findById(UUID.fromString(id))
                 .flatMap(hero -> this.powerStatsService.findById(hero.getPowerStats().getId()))
@@ -61,6 +63,7 @@ public class HeroController {
     }
 
     @PostMapping
+    @FeatureToggle(feature = "features.heroes.create")
     public ResponseEntity<Void> create(@Valid @RequestBody final Hero body) {
         boolean exists = this.heroService.existsByName(body.getName());
 
@@ -74,6 +77,7 @@ public class HeroController {
     }
 
     @PatchMapping("/{id}")
+    @FeatureToggle(feature = "features.heroes.update")
     public ResponseEntity<Void> update(@PathVariable("id") final String id, @RequestBody final Hero body) {
         final UUID uuid = UUID.fromString(id);
 
@@ -101,6 +105,7 @@ public class HeroController {
     }
 
     @PatchMapping("/{id}/enable")
+    @FeatureToggle(feature = "features.heroes.enable")
     public ResponseEntity<Void> enable(@PathVariable("id") String id) {
         checkExistence(id);
 
@@ -110,6 +115,7 @@ public class HeroController {
     }
 
     @PatchMapping("/{id}/disable")
+    @FeatureToggle(feature = "features.heroes.disable")
     public ResponseEntity<Void> disable(@PathVariable("id") String id) {
         checkExistence(id);
 
@@ -119,6 +125,7 @@ public class HeroController {
     }
 
     @DeleteMapping("/{id}")
+    @FeatureToggle(feature = "features.heroes.delete")
     public ResponseEntity<Void> delete(@PathVariable("id") String id) {
         Hero hero = this.heroService.findById(UUID.fromString(id))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -129,6 +136,7 @@ public class HeroController {
     }
 
     @GetMapping("/compare")
+    @FeatureToggle(feature = "features.heroes.compare")
     public ResponseEntity<Void> compare(@RequestParam("first") String firstId, @RequestParam("second") String secondId) {
         return null;
     }
