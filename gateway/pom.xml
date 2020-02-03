@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>interview-hystrix</artifactId>
+    <artifactId>interview-gateway</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -23,17 +23,17 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+            <artifactId>spring-cloud-starter-consul-all</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-turbine</artifactId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
     </dependencies>
 
@@ -61,8 +61,8 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>brainweb/interview-hystrix</name>
-                            <alias>interview-hystrix</alias>
+                            <name>brainweb/interview-gateway</name>
+                            <alias>interview-gateway</alias>
                             <build>
                                 <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
                                 <filter>@</filter>

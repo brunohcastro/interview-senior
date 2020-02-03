@@ -6,10 +6,6 @@ services:
       - 8400:8400
       - 8500:8500
       - 8600:8600
-  hazelcast:
-    image: hazelcast/hazelcast
-    ports:
-      - 5701:5701
   postgres:
     build:
       context: ./core/src/main/resources/db/schema
@@ -27,6 +23,10 @@ services:
       - 8080:8080
     environment:
       - DB_HOSTNAME=postgres
+      - SPRING_CLOUD_CONSUL_DISCOVERY_INSTANCE-ID=iv-core-01
+    depends_on:
+      - postgres
+      - consul
   instance-2:
     build:
       context: .
@@ -35,3 +35,19 @@ services:
       - 8081:8080
     environment:
       - DB_HOSTNAME=postgres
+      - SPRING_CLOUD_CONSUL_DISCOVERY_INSTANCE-ID=iv-core-02
+    depends_on:
+      - postgres
+      - consul
+  gateway:
+    image: brainweb/interview-gateway
+    ports:
+      - 8082:8082
+    depends_on:
+      - consul
+  hystrix:
+    image: brainweb/interview-hystrix
+    ports:
+      - 8083:8083
+    depends_on:
+      - consul

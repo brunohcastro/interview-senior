@@ -1,4 +1,4 @@
-package br.com.brainweb.interview.proxy;
+package br.com.brainweb.interview.histryx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
