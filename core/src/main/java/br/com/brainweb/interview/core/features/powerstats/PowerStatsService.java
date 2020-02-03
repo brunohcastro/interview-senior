@@ -22,7 +22,19 @@ public class PowerStatsService {
         return this.repository.findById(id).map(it -> mMapper.map(it, PowerStats.class));
     }
 
-    public void compare(PowerStats left, PowerStats right) {
+    public PowerStatsDiff compare(UUID referenceId, UUID otherId) {
+        PowerStatsEntity reference = repository.findById(referenceId).orElse(null);
+        PowerStatsEntity other = repository.findById(otherId).orElse(null);
 
+        PowerStatsDiff diff = new PowerStatsDiff().withReferenceId(referenceId).withOtherId(otherId);
+
+        if (reference != null && other != null) {
+            diff.setAgility(reference.getAgility() - other.getAgility());
+            diff.setDexterity(reference.getDexterity() - other.getDexterity());
+            diff.setIntelligence(reference.getIntelligence() - other.getIntelligence());
+            diff.setStrength(reference.getStrength() - other.getStrength());
+        }
+
+        return diff;
     }
 }

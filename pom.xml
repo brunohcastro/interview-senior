@@ -40,6 +40,7 @@
         <disruptor.version>3.4.2</disruptor.version>
         <modelmapper.version>2.3.0</modelmapper.version>
         <spring-cloud.version>2.2.1.RELEASE</spring-cloud.version>
+        <cucumber.java.version>1.2.5</cucumber.java.version>
     </properties>
 
     <modules>
@@ -128,6 +129,27 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
                 <version>${spring-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-core</artifactId>
+                <version>${cucumber.java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-java</artifactId>
+                <version>${cucumber.java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber.java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-spring</artifactId>
+                <version>${cucumber.java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

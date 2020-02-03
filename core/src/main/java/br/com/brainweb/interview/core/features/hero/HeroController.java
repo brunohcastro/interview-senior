@@ -1,12 +1,12 @@
 package br.com.brainweb.interview.core.features.hero;
 
+import br.com.brainweb.interview.core.features.powerstats.PowerStatsDiff;
 import br.com.brainweb.interview.core.features.powerstats.PowerStatsService;
 import br.com.brainweb.interview.core.toggle.FeatureToggle;
 import br.com.brainweb.interview.core.utils.PropertyUtils;
 import br.com.brainweb.interview.model.Hero;
 import br.com.brainweb.interview.model.PowerStats;
 import org.springframework.beans.BeanUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -135,10 +135,10 @@ public class HeroController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/compare")
+    @GetMapping("/{id}/compare")
     @FeatureToggle(feature = "features.heroes.compare")
-    public ResponseEntity<Void> compare(@RequestParam("first") String firstId, @RequestParam("second") String secondId) {
-        return null;
+    public PowerStatsDiff compare(@PathVariable("id") String referenceId, @RequestParam("other_id") String otherId) {
+        return this.powerStatsService.compare(UUID.fromString(referenceId), UUID.fromString(otherId));
     }
 
     private void checkExistence(String id) {
