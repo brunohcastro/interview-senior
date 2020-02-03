@@ -1,8 +1,12 @@
 spring:
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
     consul:
       discovery:
         prefer-ip-address: true
+        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
       host: 127.0.0.1
       port: 8500
       config:
@@ -13,9 +17,13 @@ spring:
 spring:
   profiles: docker
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
     consul:
       discovery:
         prefer-ip-address: true
+        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
       host: consul
       port: 8500
       config:

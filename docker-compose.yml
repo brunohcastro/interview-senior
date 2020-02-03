@@ -1,7 +1,9 @@
+
 version: "3.5"
 services:
   consul:
     image: consul
+    container_name: iv-consul
     ports:
       - 8400:8400
       - 8500:8500
@@ -12,41 +14,24 @@ services:
     container_name: iv-db
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=brainweb
-      - POSTGRES_PASSWORD=brainweb
-  instance-1:
-    build:
-      context: .
-    container_name: iv-core-01
-    ports:
-      - 8080:8080
+  core:
+    image: brainweb/interview
+    restart: on-failure
     environment:
       - DB_HOSTNAME=postgres
-      - SPRING_CLOUD_CONSUL_DISCOVERY_INSTANCE-ID=iv-core-01
-    depends_on:
-      - postgres
-      - consul
-  instance-2:
-    build:
-      context: .
-    container_name: iv-core-02
-    ports:
-      - 8081:8080
-    environment:
-      - DB_HOSTNAME=postgres
-      - SPRING_CLOUD_CONSUL_DISCOVERY_INSTANCE-ID=iv-core-02
     depends_on:
       - postgres
       - consul
   gateway:
     image: brainweb/interview-gateway
+    container_name: iv-gateway
     ports:
       - 8082:8082
     depends_on:
       - consul
   hystrix:
     image: brainweb/interview-hystrix
+    container_name: iv-hystrix
     ports:
       - 8083:8083
     depends_on:

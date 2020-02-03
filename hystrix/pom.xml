@@ -65,7 +65,6 @@
                             <alias>interview-hystrix</alias>
                             <build>
                                 <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-                                <filter>@</filter>
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
                                 </assembly>
@@ -73,6 +72,14 @@
                         </image>
                     </images>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
