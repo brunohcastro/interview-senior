@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,6 +34,9 @@ public class HeroControllerTest {
     @MockBean
     private PowerStatsService powerStatsService;
 
+    @MockBean
+    private Environment env;
+
     @InjectMocks
     private HeroController heroController;
 
@@ -42,7 +46,7 @@ public class HeroControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        this.heroController = new HeroController(heroService, powerStatsService);
+        this.heroController = new HeroController(heroService, powerStatsService, env);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(heroController).build();
     }

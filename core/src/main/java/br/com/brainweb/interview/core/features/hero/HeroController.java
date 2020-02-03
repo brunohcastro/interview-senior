@@ -1,10 +1,13 @@
 package br.com.brainweb.interview.core.features.hero;
 
 import br.com.brainweb.interview.core.features.powerstats.PowerStatsService;
+import br.com.brainweb.interview.core.toggle.FeatureToggle;
 import br.com.brainweb.interview.core.utils.PropertyUtils;
 import br.com.brainweb.interview.model.Hero;
 import br.com.brainweb.interview.model.PowerStats;
 import org.springframework.beans.BeanUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +26,16 @@ public class HeroController {
     private final HeroService heroService;
     private final PowerStatsService powerStatsService;
 
-    public HeroController(HeroService heroService, PowerStatsService powerStatsService) {
+    private Environment env;
+
+    public HeroController(HeroService heroService, PowerStatsService powerStatsService, Environment env) {
         this.heroService = heroService;
         this.powerStatsService = powerStatsService;
+        this.env = env;
     }
 
     @GetMapping
+    @FeatureToggle(feature = "feature.hero.enabled")
     public List<Hero> find(@RequestParam(value = "name", required = false) String name) {
         return heroService.find(name);
     }
