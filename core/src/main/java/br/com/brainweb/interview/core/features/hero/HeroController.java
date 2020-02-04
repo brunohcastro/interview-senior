@@ -135,10 +135,16 @@ public class HeroController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/compare")
+    @GetMapping("/{id}/compare-stats")
     @FeatureToggle(feature = "features.heroes.compare")
     public PowerStatsDiff compare(@PathVariable("id") String referenceId, @RequestParam("other_id") String otherId) {
-        return this.powerStatsService.compare(UUID.fromString(referenceId), UUID.fromString(otherId));
+        Hero reference = this.heroService.findById(UUID.fromString(referenceId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Hero other = this.heroService.findById(UUID.fromString(otherId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return this.powerStatsService.compare(reference.getPowerStats().getId(), other.getPowerStats().getId());
     }
 
     private void checkExistence(String id) {
